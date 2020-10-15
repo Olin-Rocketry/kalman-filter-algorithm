@@ -1,6 +1,6 @@
 # kalman-filter-algorithm
 #### Goal: Kalman Filter Algorithm for apogee detection
-
+Project members: Alex Butler (@lxbtlr), Aydin O'Leary (@zbwrm), & Abitamin Bharmal (Insert your github @ here)
 #### What should this look like?
 
 **inputs**: barometer data (double), as well as the read voltage from the sensor (w/ an option to include data from the IMU; however this could get sketchy quick)
