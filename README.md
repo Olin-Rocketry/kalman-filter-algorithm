@@ -1,4 +1,5 @@
-# kalman-filter-algorithm
+# kalman-filter-algorithim
+hi this is jaclyn
 #### Goal: Kalman Filter Algorithm for apogee detection
 
 #### What should this look like?
