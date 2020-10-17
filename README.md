@@ -1,7 +1,6 @@
 # kalman-filter-algorithm
 #### Goal: Kalman Filter Algorithm for apogee detection
-Project members: Alex Butler (@lxbtlr), Aydin O'Leary (@zbwrm), & Abitamin Bharmal (Insert your github @ here)
-alex butler
+Project members: Alex Butler (@lxbtlr), Aydin O'Leary (@zbwrm), & Abitamim Bharmal (@Abitamim)
 
 #### What should this look like?
 
