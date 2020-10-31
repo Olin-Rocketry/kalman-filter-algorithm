@@ -7,40 +7,60 @@
 
 %Assumptions: 
 % Readings every .5 s, Target is moving in one dimension,
-% Target will start at 2000m away, with a predicted speed of 40m/s
-starting_pos = 2000 + (rand(1)-.5)*1000;
+% Target will start anywhere from 0m to 1000m away
 
+starting_pos = (rand())*1000; %m
+expected_velocity = 40; %m/s
+alpha = .1;
+beta = .1;
 
-Real_position = [starting_pos];
-velocity = 0;
+real_position = [starting_pos];
+meas_position = [starting_pos];
+calc_position = [starting_pos];
+calc_velocity = [expected_velocity];
+
 for i = 2:2000 
-    velocity = [velocity (rand(1)+.5)*40];
-    Real_position = [Real_position Real_position(1,i-1)+velocity(i)*.5];
-    %since we are reading in terms of .5s, velocity (m/s) needs to be cut
-    %in half
+    real_position = [real_position real_position(end)+20];
+    new_meas_position = (meas_position(end) + (rand()-0.5)*10+20);
+    meas_position = [meas_position new_meas_position];
+    
+    new_calc_position = calc_position(end) + alpha*(new_meas_position - calc_position(end));
+    new_calc_velocity = calc_velocity(end) + beta*((new_meas_position - calc_position(end))/0.5);
+    
+    calc_position = [calc_position new_calc_position];
+    calc_velocity = [calc_velocity new_calc_velocity];
     
 end
 %%
+% calculate percent errors
+error_meas = (real_position - meas_position) ./ (meas_position) * 100;
+error_calc = (real_position - calc_position) ./ (calc_position) * 100;
+
+
+t = linspace(1,2000,2000);
+
 figure(1);
 hold on
 grid on
-t = linspace(1,2000,2000);
-yyaxis left;
-plot(t, velocity);
-ylabel('Velocity (m/s)')
-yyaxis right;
-plot(t, Real_position);
+plot(t, calc_velocity, 'g-');
+ylabel('Calculated Velocity (m/s)')
+xlabel('Time (s)')
+
+figure(2);
+hold on
+grid on
+plot(t, calc_position, 'r.', 'DisplayName', 'calculated');
+plot(t, meas_position, 'b.', 'DisplayName', 'measured');
+plot(t, real_position, 'g-', 'DisplayName', 'real');
 ylabel('Position (m)')
+legend();
 xlabel('time (s)')
-%%
-% In this regime: alpha = .2, beta = .1
-alpha = .2;
-beta = .1;
 
-for k = 1:2000
-    
-    
-    
-    
-end
-
+figure(3);
+hold on
+grid on
+plot(t, error_meas, 'DisplayName', 'Measured values')
+plot(t, error_calc, 'DisplayName', 'Calculated values')
+ylabel('Percent error from actual');
+xlabel('Time (s)');
+legend();
