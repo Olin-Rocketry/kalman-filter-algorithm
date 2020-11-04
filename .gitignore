@@ -31,5 +31,6 @@
 *.out
 *.app
 
-#Python venv
+#Python venv and pycharm config
 python_kalman_filter/venv/
+python_kalman_filter/.idea/
