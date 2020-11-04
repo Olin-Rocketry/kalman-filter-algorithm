@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+#Python venv
+./python_kalman_filter/venv/
