@@ -8,11 +8,13 @@
 %Assumptions: 
 % Readings every .5 s, Target is moving in one dimension,
 % Target will start anywhere from 0m to 1000m away
+data = table2array(readtable("python_kalman_filter/test_data/dtl1.csv"));
 
 starting_pos = (rand())*1000; %m
 expected_velocity = 40; %m/s
 alpha = .1;
 beta = .1;
+gamme = .1;
 
 real_position = [starting_pos];
 meas_position = [starting_pos];
