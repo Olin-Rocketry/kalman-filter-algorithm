@@ -34,7 +34,7 @@ function res = plot_res(T, true_state, noise_state, kalman_state)
     plot(T, kalman_state(:,1), "b-", "Linewidth", 1)
     hold off
     xlabel("Time (s)")
-    ylabel("Hight (m)")
+    ylabel("Height (m)")
 
     
     
@@ -60,4 +60,4 @@ function res = plot_res(T, true_state, noise_state, kalman_state)
 
     
 
-    legend("True Value", "Simulated Mesurment", "Kalman Estimation", "Kalman Error", "Sensor Error" )
+    legend("True Value", "Simulated Measurement", "Kalman Estimation", "Kalman Error", "Sensor Error" )

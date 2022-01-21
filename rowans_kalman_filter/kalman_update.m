@@ -1,4 +1,4 @@
-function [state, p_cov] = kalman_update(state, p_cov, measurement, dt)
+function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term)
 
     %https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/
     
@@ -6,6 +6,9 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt)
     
     A = [1 dt ; 0 1];
     B = [0.5 * dt^2 ; dt];
+    
+
+    
     H = [1 0 ; 0 1];
 
     predicted_state = predict_state(state, A, B);
@@ -22,7 +25,14 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt)
 
     
     function res = predict_state(state, A, B)
-        res = A*state + B*MU;
+        state(2);
+        drag_force = 0.5 * 1.5 * state(2)^2 * 0.2 * 1.225;
+        drag = drag_force / 22;
+        if drag_term
+            res = A*state + B*(MU+drag);
+        else
+            res = A*state + B*MU;
+        end
     end
 
     function res = predict_p_cov(p_cov, A)
