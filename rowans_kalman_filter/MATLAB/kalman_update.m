@@ -11,7 +11,7 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term
     
     H = [1 0 ; 0 1];
 
-    predicted_state = predict_state(state, A, B);
+    predicted_state = predict_state(state, A, B)
     
     predicted_p_cov = predict_p_cov(p_cov, A);
     
@@ -25,7 +25,6 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term
 
     
     function res = predict_state(state, A, B)
-        state(2);
         drag_force = 0.5 * 1.5 * state(2)^2 * 0.2 * 1.225;
         drag = drag_force / 22;
         if drag_term
