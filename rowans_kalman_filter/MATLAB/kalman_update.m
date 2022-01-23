@@ -4,7 +4,7 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term
     
     global R Q MU;
     
-    A = [1 dt ; 0 1];
+    A = [1 dt ; 0 1]
     B = [0.5 * dt^2 ; dt];
     
 
@@ -13,13 +13,13 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term
 
     predicted_state = predict_state(state, A, B)
     
-    predicted_p_cov = predict_p_cov(p_cov, A);
+    predicted_p_cov = predict_p_cov(p_cov, A)
     
-    kalman_gain = update_gain(predicted_p_cov, H, R);
+    kalman_gain = update_gain(predicted_p_cov, H, R)
     
-    state = adjust_state(predicted_state, measurement, H, kalman_gain);
+    state = adjust_state(predicted_state, measurement, H, kalman_gain)
     
-    p_cov = adjust_p_cov(predicted_p_cov, kalman_gain, H);
+    p_cov = adjust_p_cov(predicted_p_cov, kalman_gain, H)
     
 
 

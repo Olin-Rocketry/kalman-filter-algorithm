@@ -4,18 +4,20 @@
 int main(){
 
 double dt = 0.05;
-double Q[2][2] = {{25, 0}, {0, 25}};
-double R[2][2] = {{100, 0}, {0, 100}};
-double A[2][2] = {{1, dt}, {0, 1}};
-double B[2] = {0.5 * dt * dt, dt};
-double p_cov[2][2] = {{25, 0}, {0, 25}};
+
 double state[2] = {9.0000,  180.0000};
+double measurement[2] = {12, 60};
+double p_cov[2][2] = {{25, 0}, {0, 25}};
 
-double kalman_state[2][2] = {0, 0};
+double adjusted_state[2], adjusted_p_cov[2][2];
 
-predict_state(state, A, B, state, false);
 
-printf("<%f, %f>", state[0], state[1]);
+kalman_update(state, p_cov, measurement, dt, false, adjusted_state, adjusted_p_cov);
+
+
+
+printf("[%f \n %f] \n", adjusted_state[0], adjusted_state[1]);
+printf("[%f %f \n %f %f] \n", adjusted_p_cov[0][0], adjusted_p_cov[0][1], adjusted_p_cov[1][0], adjusted_p_cov[1][1]);
 
 return 0;
 }
