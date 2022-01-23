@@ -17,6 +17,8 @@
 
 #include <math.h>
 #include <stdio.h>
+
+//comment this line for cpp testing but uncomment for arduino
 #include <Arduino.h>
 
 //constans

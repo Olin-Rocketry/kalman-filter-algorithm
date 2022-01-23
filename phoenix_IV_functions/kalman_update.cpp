@@ -10,7 +10,7 @@ void kalman_update(double *state, double p_cov[2][2], double *measurement, doubl
     double kalman_gain[2][2];
 
 
-    predict_state(state, A, B, state, false);
+    predict_state(state, A, B, state, drag_term);
     predict_p_cov(p_cov, A, Q, p_cov);
     update_gain(p_cov, H, R, kalman_gain);
     adjust_state(state, measurement, H, kalman_gain, adjusted_state);

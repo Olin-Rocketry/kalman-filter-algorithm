@@ -7,8 +7,8 @@ void predict_state(double *current_state, double A[2][2], double *B, double *pre
     double U[2];
 
     //if parachute is deployed, factor in drag into the model
-    if (drag_term){
-
+    if (drag_term == true){
+        printf("Drag ");
         //=====calculate force of drag======
         
         //constants for drag force
@@ -18,13 +18,15 @@ void predict_state(double *current_state, double A[2][2], double *B, double *pre
         double rocket_mass = 22; //kg
 
         //F_d = 1/2 pv^2 C_d A
-        double drag_force = 0.5 * air_density * (current_state[1] * current_state[1]) * coefficient_of_drag  * chute_cross_section;
+        double drag_force = 0.5 * air_density * (current_state[1] * current_state[1]) * coefficient_of_drag  * chute_cross_section * (current_state[1] / abs(current_state[1]));
         double drag = drag_force / rocket_mass;
+        printf("%f \n", drag);
 
         //======update state using model=======
         //Ax + B(grav+drag)
         mat_vec_prod(A, current_state, predicted_state);
-        vec_scale(B, MU + drag, U);
+        double acc = MU - drag;
+        vec_scale(B, acc, U);
         vec_sum(predicted_state, U, predicted_state);
     }
 

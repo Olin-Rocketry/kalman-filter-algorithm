@@ -12,7 +12,7 @@ double p_cov[2][2] = {{25, 0}, {0, 25}};
 double adjusted_state[2], adjusted_p_cov[2][2];
 
 
-kalman_update(state, p_cov, measurement, dt, false, adjusted_state, adjusted_p_cov);
+kalman_update(state, p_cov, measurement, dt, true, adjusted_state, adjusted_p_cov);
 
 
 
