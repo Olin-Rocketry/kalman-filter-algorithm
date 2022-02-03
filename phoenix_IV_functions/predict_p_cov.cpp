@@ -1,22 +1,36 @@
 #include "phoenix_IV_functions.h"
 
 
-void predict_p_cov(double current_p_cov[2][2], double A[2][2], double Q[2][2], double predicted_p_cov[2][2]){
+void predict_p_cov(double current_p_cov[3][3], double A[3][3], double Q[3][3], double predicted_p_cov[3][3]){
+    
     //Target Equation: ApA' + Q
 
-    //temp variables
-    double AP[2][2];
-    double AT[2][2];
+    //(pA')
+    double B[3][3];
 
-    //Ap
-    mat_mat_prod(A, current_p_cov, AP);
+    B[0][0] = (current_p_cov[0][0] * A[0][0]) + (current_p_cov[0][1] * A[0][1]) + (current_p_cov[0][2] * A[0][2]);
+    B[0][1] = (current_p_cov[0][0] * A[1][0]) + (current_p_cov[0][1] * A[1][1]) + (current_p_cov[0][2] * A[1][2]);
+    B[0][2] = (current_p_cov[0][0] * A[2][0]) + (current_p_cov[0][1] * A[2][1]) + (current_p_cov[0][2] * A[2][2]);
 
-    //A'
-    mat_transpose(A, AT);
+    B[1][0] = (current_p_cov[1][0] * A[0][0]) + (current_p_cov[1][1] * A[0][1]) + (current_p_cov[1][2] * A[0][2]);
+    B[1][1] = (current_p_cov[1][0] * A[1][0]) + (current_p_cov[1][1] * A[1][1]) + (current_p_cov[1][2] * A[1][2]);
+    B[1][2] = (current_p_cov[1][0] * A[2][0]) + (current_p_cov[1][1] * A[2][1]) + (current_p_cov[1][2] * A[2][2]);
 
-    //(Ap)A'
-    mat_mat_prod(AP, AT, predicted_p_cov);
-    
-    //(ApA') + Q
-    mat_sum(predicted_p_cov, Q, predicted_p_cov);
+    B[2][0] = (current_p_cov[2][0] * A[0][0]) + (current_p_cov[2][1] * A[0][1]) + (current_p_cov[2][2] * A[0][2]);
+    B[2][1] = (current_p_cov[2][0] * A[1][0]) + (current_p_cov[2][1] * A[1][1]) + (current_p_cov[2][2] * A[1][2]);
+    B[2][2] = (current_p_cov[2][0] * A[2][0]) + (current_p_cov[2][1] * A[2][1]) + (current_p_cov[2][2] * A[2][2]);
+
+
+    //A*(pA') + Q
+    predicted_p_cov[0][0] = (A[0][0] * B[0][0]) + (A[0][1] * B[1][0]) + (A[0][2] * B[2][0]) + Q[0][0];
+    predicted_p_cov[0][1] = (A[0][0] * B[0][1]) + (A[0][1] * B[1][1]) + (A[0][2] * B[2][1]) + Q[0][1];
+    predicted_p_cov[0][2] = (A[0][0] * B[0][2]) + (A[0][1] * B[1][2]) + (A[0][2] * B[2][2]) + Q[0][2];
+
+    predicted_p_cov[1][0] = (A[1][0] * B[0][0]) + (A[1][1] * B[1][0]) + (A[1][2] * B[2][0]) + Q[1][0];
+    predicted_p_cov[1][1] = (A[1][0] * B[0][1]) + (A[1][1] * B[1][1]) + (A[1][2] * B[2][1]) + Q[1][1];
+    predicted_p_cov[1][2] = (A[1][0] * B[0][2]) + (A[1][1] * B[1][2]) + (A[1][2] * B[2][2]) + Q[1][2];
+
+    predicted_p_cov[2][0] = (A[2][0] * B[0][0]) + (A[2][1] * B[1][0]) + (A[2][2] * B[2][0]) + Q[2][0];
+    predicted_p_cov[2][1] = (A[2][0] * B[0][1]) + (A[2][1] * B[1][1]) + (A[2][2] * B[2][1]) + Q[2][1];
+    predicted_p_cov[2][2] = (A[2][0] * B[0][2]) + (A[2][1] * B[1][2]) + (A[2][2] * B[2][2]) + Q[2][2];
 }

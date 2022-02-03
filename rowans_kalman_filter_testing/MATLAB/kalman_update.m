@@ -49,6 +49,6 @@ function [state, p_cov] = kalman_update(state, p_cov, measurement, dt, drag_term
     end
 
     function res = adjust_p_cov(predicted_p_cov, kalman_gain, H)
-        res = eye(2,2) - kalman_gain*H*predicted_p_cov;
+        res = predicted_p_cov - kalman_gain*H*predicted_p_cov;
     end
 end

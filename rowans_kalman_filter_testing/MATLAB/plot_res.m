@@ -21,8 +21,8 @@ function res = plot_res(T, true_state, noise_state, kalman_state)
 
     yyaxis right
     hold on
-    plot(T, kalman_error(:,1), "b:", "Linewidth", 1)
-    plot(T, noise_error(:,1), "r:", "Linewidth", 1)
+    %plot(T, kalman_error(:,1), "b:", "Linewidth", 1)
+    %plot(T, noise_error(:,1), "r:", "Linewidth", 1)
     hold off
     ylim([0 100])
     ylabel("Error (m)")
@@ -42,8 +42,8 @@ function res = plot_res(T, true_state, noise_state, kalman_state)
     
     yyaxis right
     hold on
-    plot(T, kalman_error(:,2), "b:", "Linewidth", 1)
-    plot(T, noise_error(:,2), "r:", "Linewidth", 1)
+    %plot(T, kalman_error(:,2), "b:", "Linewidth", 1)
+    %plot(T, noise_error(:,2), "r:", "Linewidth", 1)
     hold off
     ylim([0 100])
     ylabel("Error (m/s)")
