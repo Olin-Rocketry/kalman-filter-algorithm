@@ -7,13 +7,7 @@
 double data[7000][3];
 int i = 0;
 
-FILE *fp = fopen("test.txt", "r");
-char line[256];
-while (fgets(line, sizeof(line), fp)) {
-  sscanf(line, "%lf,%lf,%lf", &data[i][0], &data[i][1], &data[i][2]);
-  i++;
-}
-fclose;
+
 
 
 
@@ -23,8 +17,15 @@ fclose;
 // int i = 1;
 
 
-// void setup() {
-//   Serial.begin(9600);
+ void setup() {
+  FILE *fp = fopen("test.txt", "r");
+char line[256];
+while (fgets(line, sizeof(line), fp)) {
+  sscanf(line, "%lf,%lf,%lf", &data[i][0], &data[i][1], &data[i][2]);
+  i++;
+}
+fclose;
+ Serial.begin(9600);
 
 
   
@@ -49,11 +50,10 @@ void loop(){
 
     Serial.print(data[i][1]);
     Serial.print(" ");
-    Serial.println(dat[i][2]);
+    Serial.println(data[i][2]);
 
     //increment counter
     i++;
     delay(100);
   }
 }
-
