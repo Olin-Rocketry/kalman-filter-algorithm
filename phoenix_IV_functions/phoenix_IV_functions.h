@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 //comment this line for cpp testing but uncomment for arduino
-#include <Arduino.h>
+//#include <Arduino.h>
 
 //kalman function declerations
 void predict_state(double *current_state, double A[3][3], double *predicted_state);
