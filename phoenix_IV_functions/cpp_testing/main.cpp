@@ -1,7 +1,18 @@
 #include "../phoenix_IV_functions.h"
 #include <stdio.h>
 
+
+
+
 int main(){
+
+//     FILE *fp = fopen("test.txt", "r");
+// char line[256];
+// while (fgets(line, sizeof(line), fp)) {
+//   sscanf(line, "%lf,%lf,%lf", &data[i][0], &data[i][1], &data[i][2]);
+//   i++;
+// }
+// fclose;
 
 
 double dt = 0.05;
