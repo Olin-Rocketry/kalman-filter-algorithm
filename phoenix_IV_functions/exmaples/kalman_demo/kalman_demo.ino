@@ -83,8 +83,10 @@ if (dataFile) {
 
     double dt = data[j][0] - data[j-1][0];
     double measurement[2] = {data[j][1], data[j][2]};
-    double adjusted_state[3], adjusted_p_cov[3][3];
+    //double adjusted_state[3], adjusted_p_cov[3][3];
     
+    
+    //time, altitude, acceleration
     
     kalman_update(state, p_cov, measurement, dt, state, p_cov);
     
